@@ -11,12 +11,14 @@ var order = require('gulp-order');
 
 gulp.task('sass', function() {
     return gulp.src('src/scss/main.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(autoprefixer({
             browsers: ['last 3 versions'],
             cascade: false
         }))
         .pipe(concat('style.css'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
 });
